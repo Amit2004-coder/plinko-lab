@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+@import "tailwindcss";
+
+:root {
+  --neon-gold: #f5c518;
+  --neon-cyan: #00e5ff;
+  --neon-pink: #ff0080;
+  --neon-green: #00ff88;
+  --bg-dark: #050508;
+  --bg-card: #0d0d18;
+  --bg-card2: #11111f;
+  --border-glow: rgba(245,197,24,0.3);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--bg-dark);
+  font-family: 'Share Tech Mono', monospace;
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(0,229,255,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(255,0,128,0.04) 0%, transparent 50%);
+}
+
+.font-display { font-family: 'Orbitron', sans-serif; }
+.font-mono-game { font-family: 'Share Tech Mono', monospace; }
+
+/* Scanline overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.03) 2px,
+    rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Neon glow utilities */
+.glow-gold { text-shadow: 0 0 10px var(--neon-gold), 0 0 30px var(--neon-gold); }
+.glow-cyan { text-shadow: 0 0 10px var(--neon-cyan), 0 0 30px var(--neon-cyan); }
+.glow-pink { text-shadow: 0 0 10px var(--neon-pink), 0 0 30px var(--neon-pink); }
+.glow-green { text-shadow: 0 0 10px var(--neon-green), 0 0 30px var(--neon-green); }
+
+.border-glow {
+  border: 1px solid var(--border-glow);
+  box-shadow: 0 0 15px rgba(245,197,24,0.1), inset 0 0 15px rgba(245,197,24,0.03);
+}
+
+.btn-neon {
+  background: transparent;
+  border: 2px solid var(--neon-gold);
+  color: var(--neon-gold);
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.btn-neon:hover:not(:disabled) {
+  background: var(--neon-gold);
+  color: #000;
+  box-shadow: 0 0 20px var(--neon-gold), 0 0 40px rgba(245,197,24,0.4);
+}
+.btn-neon:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.btn-drop {
+  background: linear-gradient(135deg, var(--neon-gold), #ff6b00);
+  color: #000;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: none;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.btn-drop:hover:not(:disabled) {
+  box-shadow: 0 0 30px var(--neon-gold), 0 0 60px rgba(245,197,24,0.5);
+  transform: translateY(-1px);
+}
+.btn-drop:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+.btn-drop:active:not(:disabled) { transform: translateY(1px); }
+
+/* Input styles */
+.input-neon {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(245,197,24,0.3);
+  color: var(--neon-gold);
+  font-family: 'Share Tech Mono', monospace;
+  outline: none;
+  transition: all 0.2s;
+}
+.input-neon:focus {
+  border-color: var(--neon-gold);
+  box-shadow: 0 0 10px rgba(245,197,24,0.2);
+}
+
+/* Bin pulse animation */
+@keyframes binPulse {
+  0%   { transform: scaleY(1); box-shadow: none; }
+  30%  { transform: scaleY(1.12); box-shadow: 0 0 20px currentColor; }
+  100% { transform: scaleY(1); box-shadow: none; }
+}
+.bin-pulse { animation: binPulse 0.5s ease-out; }
+
+/* TILT mode */
+.tilt-mode { 
+  animation: tiltBoard 0.3s ease-out forwards;
+  filter: sepia(0.5) contrast(1.2) hue-rotate(20deg);
+}
+@keyframes tiltBoard {
+  0%   { transform: rotate(0deg); }
+  30%  { transform: rotate(-5deg); }
+  70%  { transform: rotate(5deg); }
+  100% { transform: rotate(-3deg); }
+}
+
+/* Confetti particle */
+@keyframes confettiFall {
+  0%   { opacity: 1; transform: translateY(0) rotate(0deg); }
+  100% { opacity: 0; transform: translateY(120px) rotate(720deg); }
+}
+.confetti-particle { animation: confettiFall 1s ease-out forwards; }
+
+/* Golden ball trail */
+@keyframes goldenPulse {
+  0%, 100% { box-shadow: 0 0 8px #ffd700, 0 0 20px #ffd700; }
+  50%       { box-shadow: 0 0 20px #ffd700, 0 0 50px #ffd700; }
+}
+
+/* Secret theme */
+.dungeon-theme {
+  filter: brightness(0.7) sepia(0.8) hue-rotate(20deg);
+  background-image: radial-gradient(circle at center, rgba(255,140,0,0.1) 0%, transparent 70%) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

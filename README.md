@@ -2,7 +2,8 @@
 
 Interactive Plinko game with cryptographic commit-reveal fairness, canvas animation, Web Audio sounds, and a public verifier page.
 
-Built for the **Daphnis Labs Full-Stack Developer Intern** take-home assignment.
+Built for the **Daphnis Labs Full-Stack Developer Intern** take-home assignment. 
+live Link: https://plinko-lab-sais.onrender.com/
 
 ---
 
